@@ -56,7 +56,7 @@ public class Bird : MonoBehaviour
             {
                 //...if it did, then stop the column if it's moveing and move column away...
                 other.gameObject.GetComponentInParent<Column>().isMoving = false;
-                other.gameObject.GetComponentInParent<Rigidbody2D>().MovePosition(new Vector2(40, other.gameObject.GetComponent<Rigidbody2D>().position.y));
+                other.gameObject.GetComponentInParent<Rigidbody2D>().MovePosition(new Vector2(60, other.gameObject.GetComponent<Rigidbody2D>().position.y));
             }
             //...else if it hit ground...
             else
