@@ -1,2 +1,1 @@
-# CherryGames1
-
+Paweł Kowaluk - grupa lepszych
