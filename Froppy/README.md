@@ -1,1 +1,0 @@
-Paweł Kowaluk - grupa lepszych
