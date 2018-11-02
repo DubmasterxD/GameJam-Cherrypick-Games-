@@ -36,8 +36,8 @@ public class GameControl : MonoBehaviour {
         move[1] -= Mathf.Sin(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity * Time.deltaTime;
         if (Mathf.Pow(move[0], 2) + Mathf.Pow(move[1], 2) > maxVelocity)
         {
-            move[0] = -Mathf.Cos(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity ;
-            move[1] = -Mathf.Sin(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity ;
+            move[0] += Mathf.Cos(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity * Time.deltaTime;
+            move[1] += Mathf.Sin(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity * Time.deltaTime;
         }
         move[0] -= move[0] / 6 * 5 * Time.deltaTime;
         move[1] -= move[1] / 6 * 5 * Time.deltaTime;

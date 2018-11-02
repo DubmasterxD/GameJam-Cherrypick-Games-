@@ -382,7 +382,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 583255092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.36, y: 0, z: -11.343015}
+  m_LocalPosition: {x: -0.36, y: 0.0143, z: -0.13}
   m_LocalScale: {x: 0.45741424, y: 0.29292542, z: 0.60107}
   m_Children: []
   m_Father: {fileID: 0}
@@ -400,6 +400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnVelocity: 4
+  shotsDelay: 0.2
+  shot: {fileID: 1400522864766102, guid: c83564069b2657d41ac89542760c5b6b, type: 2}
 --- !u!95 &583255097
 Animator:
   serializedVersion: 3

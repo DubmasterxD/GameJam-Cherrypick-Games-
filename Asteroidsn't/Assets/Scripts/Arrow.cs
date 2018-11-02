@@ -6,6 +6,9 @@ public class Arrow : MonoBehaviour {
 
     private Animator anim;
     public float turnVelocity = 4f;
+    public float shotsDelay = 0.2f;
+    private float timeSinceLastShot = 0;
+    public GameObject shot;
 
 	// Use this for initialization
 	void Start () {
@@ -41,5 +44,21 @@ public class Arrow : MonoBehaviour {
             GameControl.instance.currVelocity = 0;
         }
         anim.Play("PlayerMovement", 0, GameControl.instance.currVelocity / GameControl.instance.maxVelocity);
+        if(timeSinceLastShot!=0)
+        {
+            timeSinceLastShot += Time.deltaTime;
+            if(timeSinceLastShot>=shotsDelay)
+            {
+                timeSinceLastShot = 0;
+            }
+        }
+        if(Input.GetKey(KeyCode.Space))
+        {
+            if(timeSinceLastShot==0)
+            {
+                timeSinceLastShot += Time.deltaTime;
+                Instantiate(shot, new Vector3(Mathf.Cos(Mathf.Deg2Rad * transform.localEulerAngles.z)/9*4, Mathf.Sin(Mathf.Deg2Rad * transform.localEulerAngles.z) / 9 * 4, 0), transform.rotation);
+            }
+        }
 	}
 }
