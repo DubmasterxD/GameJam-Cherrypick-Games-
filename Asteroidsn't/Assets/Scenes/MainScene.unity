@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02939a54e7435f747b638792933d848a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnVelocity: 2
+  turnVelocity: 4
 --- !u!95 &583255097
 Animator:
   serializedVersion: 3
@@ -544,8 +544,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473060393}
-  - component: {fileID: 1473060396}
   - component: {fileID: 1473060394}
+  - component: {fileID: 1473060396}
   - component: {fileID: 1473060395}
   - component: {fileID: 1473060392}
   m_Layer: 0

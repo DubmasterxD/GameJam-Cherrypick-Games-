@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour {
 
     private Animator anim;
-    public float turnVelocity = 2f;
+    public float turnVelocity = 4f;
 
 	// Use this for initialization
 	void Start () {
