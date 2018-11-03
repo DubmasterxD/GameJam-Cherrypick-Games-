@@ -25,4 +25,10 @@ public class Shots : MonoBehaviour {
             Destroy(this.gameObject);
         }
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameControl.instance.AddPoint();
+        Destroy(this.gameObject);
+    }
 }

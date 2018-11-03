@@ -11,6 +11,12 @@ public class GameControl : MonoBehaviour {
     public float currVelocity=0;
     public float gainVelocity=0.02f;
     public Vector2 move = new Vector2(0,0);
+    private int points = 0;
+    public Text pointsText;
+    private int lifesLeft = 3;
+    public Text lifesLeftText;
+    public bool gameOver = false;
+    public GameObject gameOverUI;
 
     void Awake()
     {
@@ -41,5 +47,33 @@ public class GameControl : MonoBehaviour {
         }
         move[0] -= move[0] / 6 * 5 * Time.deltaTime;
         move[1] -= move[1] / 6 * 5 * Time.deltaTime;
+        if (gameOver && Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+    }
+
+    public void AddPoint()
+    {
+        if (!gameOver)
+        {
+            points++;
+            pointsText.text = "Score : " + points;
+        }
+    }
+
+    public void GotHit()
+    {
+        lifesLeft--;
+        if (lifesLeft>0)
+        {
+            lifesLeftText.text = "Lifes : " + lifesLeft;
+        }
+        else
+        {
+            gameOver = true;
+            gameOverUI.SetActive(true);
+        }
     }
 }
