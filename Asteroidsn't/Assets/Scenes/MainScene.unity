@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnVelocity: 4
-  shotsDelay: 0.2
+  shotsDelay: 0.15
   shot: {fileID: 1400522864766102, guid: c83564069b2657d41ac89542760c5b6b, type: 2}
 --- !u!95 &583255097
 Animator:
@@ -924,7 +924,7 @@ MonoBehaviour:
     type: 2}
   trianglesPrefab: {fileID: 1884507871337836, guid: a9011c94dd2a7c84c8deb75bfbbb2ff9,
     type: 2}
-  activeRate: 1
+  activeRate: 3
   activeMin: {x: 5, y: -5}
   activeMax: {x: 6, y: 5}
 --- !u!114 &1316354211

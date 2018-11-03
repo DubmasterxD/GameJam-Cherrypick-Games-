@@ -50,13 +50,17 @@ public class SpawningObstacles : MonoBehaviour
             }
             else
             {
-                if(inactiveTriangles.Count>0)
+                if (inactiveTriangles.Count > 0)
                 {
                     inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(Random.Range(activeMin[0], activeMax[0]), Random.Range(activeMin[1], activeMax[1]), 0), transform.rotation);
                     inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
                     inactiveTriangles.RemoveAt(0);
                 }
             }
+        }
+        if (activeRate > 0.1)
+        {
+            activeRate -= Time.deltaTime / 200;
         }
     }
 
@@ -69,6 +73,19 @@ public class SpawningObstacles : MonoBehaviour
         else
         {
             inactiveSquares.Add(obstacle);
+        }
+    }
+
+    public void MakeTriangles(Vector2 position)
+    {
+        if (!GameControl.instance.gameOver && inactiveTriangles.Count > 1)
+        {
+            inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] + 0.1f, position[1] + 0.1f, 0), transform.rotation);
+            inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
+            inactiveTriangles.RemoveAt(0);
+            inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] - 0.1f, position[1] - 0.1f, 0), transform.rotation);
+            inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
+            inactiveTriangles.RemoveAt(0);
         }
     }
 }

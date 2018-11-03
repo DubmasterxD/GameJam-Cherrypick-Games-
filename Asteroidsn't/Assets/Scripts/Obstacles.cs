@@ -8,7 +8,7 @@ public class Obstacles : MonoBehaviour
     public float speedMin = 0.5f;
     public float speedMax = 4f;
     private float speed;
-    private Vector2 direction;
+    private Vector2 direction = new Vector2();
     private Rigidbody2D rb;
     public float edge = 5.07f;
     private float inactiveObstaclesXLimit = 29;
@@ -67,7 +67,16 @@ public class Obstacles : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Vector2 tmp = Vector2.negativeInfinity;
+            if(type==Types.Square)
+            {
+                tmp = transform.position;
+            }
             transform.SetPositionAndRotation(new Vector3(inactiveObstaclesXLimit + 5, transform.position.y, 0), transform.rotation);
+            if(tmp[0]!=float.NegativeInfinity)
+            {
+                GameControl.instance.gameObject.GetComponent<SpawningObstacles>().MakeTriangles(tmp);
+            }
             GameControl.instance.gameObject.GetComponent<SpawningObstacles>().AddToList(this.gameObject);
         }
     }
