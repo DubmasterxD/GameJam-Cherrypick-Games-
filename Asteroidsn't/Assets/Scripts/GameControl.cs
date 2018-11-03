@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameControl : MonoBehaviour {
+public class GameControl : MonoBehaviour
+{
 
     public static GameControl instance;
-    public float maxVelocity=0.3f;
-    public float currVelocity=0;
-    public float gainVelocity=0.02f;
-    public Vector2 move = new Vector2(0,0);
+    public float maxVelocity = 0.3f;
+    public float currVelocity = 0;
+    public float gainVelocity = 0.02f;
+    public Vector2 move = new Vector2(0, 0);
     private int points = 0;
     public Text pointsText;
     private int lifesLeft = 3;
@@ -20,20 +21,21 @@ public class GameControl : MonoBehaviour {
 
     void Awake()
     {
-        if(instance==null)
+        if (instance == null)
         {
             instance = this;
         }
-        else if(instance!=this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -47,7 +49,7 @@ public class GameControl : MonoBehaviour {
         }
         move[0] -= move[0] / 6 * 5 * Time.deltaTime;
         move[1] -= move[1] / 6 * 5 * Time.deltaTime;
-        if (gameOver && Input.GetMouseButtonDown(0))
+        if (gameOver && Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -66,12 +68,13 @@ public class GameControl : MonoBehaviour {
     public void GotHit()
     {
         lifesLeft--;
-        if (lifesLeft>0)
+        if (lifesLeft > 0)
         {
             lifesLeftText.text = "Lifes : " + lifesLeft;
         }
         else
         {
+            lifesLeftText.text = "Lifes : " + 0;
             gameOver = true;
             gameOverUI.SetActive(true);
         }

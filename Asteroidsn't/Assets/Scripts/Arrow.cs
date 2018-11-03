@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : MonoBehaviour
+{
 
     private Animator anim;
     public float turnVelocity = 4f;
@@ -10,13 +11,14 @@ public class Arrow : MonoBehaviour {
     private float timeSinceLastShot = 0;
     public GameObject shot;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         anim = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (!GameControl.instance.gameOver)
         {
@@ -68,7 +70,7 @@ public class Arrow : MonoBehaviour {
             anim.Play("PlayerMovement", 0, 0);
             GameControl.instance.currVelocity = 0;
         }
-	}
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameControl.instance.GotHit();
