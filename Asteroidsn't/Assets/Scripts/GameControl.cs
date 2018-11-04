@@ -18,6 +18,7 @@ public class GameControl : MonoBehaviour
     public Text lifesLeftText;
     public bool gameOver = false;
     public GameObject gameOverUI;
+    public GameObject player;
 
     void Awake()
     {
@@ -77,6 +78,18 @@ public class GameControl : MonoBehaviour
             lifesLeftText.text = "Lifes : " + 0;
             gameOver = true;
             gameOverUI.SetActive(true);
+        }
+    }
+
+    public int LifesLeft
+    {
+        get
+        {
+            return lifesLeft;
+        }
+        set
+        {
+            lifesLeft = value;
         }
     }
 }

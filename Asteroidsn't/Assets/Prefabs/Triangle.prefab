@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50245058859708272}
   - component: {fileID: 114724093637682832}
   - component: {fileID: 114997181071115720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,8 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edeb89427f3c154c9642aabcb88ee90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  direction: {x: 0, y: 0}
+  speedMin: 0.5
+  speedMax: 4
+  edge: 5.07
+  type: 0
 --- !u!114 &114997181071115720
 MonoBehaviour:
   m_ObjectHideFlags: 1

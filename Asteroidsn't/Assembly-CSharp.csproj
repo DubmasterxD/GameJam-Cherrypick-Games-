@@ -62,11 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Arrow.cs" />
+    <Compile Include="Assets\Scripts\Buffs.cs" />
     <Compile Include="Assets\Scripts\GameControl.cs" />
     <Compile Include="Assets\Scripts\Moving.cs" />
     <Compile Include="Assets\Scripts\Obstacles.cs" />
     <Compile Include="Assets\Scripts\ScrollingBackground.cs" />
     <Compile Include="Assets\Scripts\Shots.cs" />
+    <Compile Include="Assets\Scripts\SpawningBuffs.cs" />
     <Compile Include="Assets\Scripts\SpawningObstacles.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/dubma/Documents/CherryGames/Asteroidsn't/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 583255093}
   - component: {fileID: 583255097}
   - component: {fileID: 583255096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -900,6 +900,7 @@ GameObject:
   - component: {fileID: 1316354212}
   - component: {fileID: 1316354211}
   - component: {fileID: 1316354210}
+  - component: {fileID: 1316354213}
   m_Layer: 0
   m_Name: GameControl
   m_TagString: Untagged
@@ -946,6 +947,7 @@ MonoBehaviour:
   lifesLeftText: {fileID: 1308328602}
   gameOver: 0
   gameOverUI: {fileID: 202962893}
+  player: {fileID: 583255092}
 --- !u!4 &1316354212
 Transform:
   m_ObjectHideFlags: 0
@@ -959,6 +961,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1316354213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1316354209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e169320deb0712640bc54aadc5fdbab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitPlace: {x: 0, y: 30, z: 0}
+  spawnTime: 60
+  maxStayTime: 5
+  plusPrefab: {fileID: 1207203581654932, guid: 4c5bd51790243ce45b28131afa023c3a, type: 2}
+  x2Prefab: {fileID: 1503281862235568, guid: fe86eda807bd24941bc65ed46b302965, type: 2}
+  destroyPrefab: {fileID: 1946445754219556, guid: c548c16181d1f5647b7b7efd9495f992,
+    type: 2}
 --- !u!1 &1460962211
 GameObject:
   m_ObjectHideFlags: 0
