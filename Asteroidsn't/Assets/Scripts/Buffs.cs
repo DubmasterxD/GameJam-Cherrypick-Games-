@@ -36,6 +36,7 @@ public class Buffs : MonoBehaviour {
     {
         if(collision.gameObject.tag=="Player")
         {
+            transform.SetPositionAndRotation(GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace, transform.rotation);
             switch (bonus)
             {
                 case Bonuses.Plus:
@@ -46,15 +47,14 @@ public class Buffs : MonoBehaviour {
                     GameControl.instance.player.GetComponent<Arrow>().shotsDelay /= 8 / 7f;
                     break;
                 case Bonuses.Destroy:
-                    for (int i = 0; i < 360; i++)
+                    for (int i = 0; i < 100/GameControl.instance.GetComponent<SpawningObstacles>().activeRate; i++)
                     {
-                        Instantiate(GameControl.instance.player.GetComponent<Arrow>().shot, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.Euler(0, 0, i));
+                        GameControl.instance.AddPoint();
                     }
                     break;
                 default:
                     break;
             }
-            transform.SetPositionAndRotation(GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace, transform.rotation);
         }
     }
 }

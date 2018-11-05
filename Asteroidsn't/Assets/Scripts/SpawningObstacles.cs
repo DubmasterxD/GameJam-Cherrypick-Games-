@@ -58,7 +58,7 @@ public class SpawningObstacles : MonoBehaviour
                 }
             }
         }
-        if (activeRate > 0.1)
+        if (activeRate > 0.01)
         {
             activeRate -= Time.deltaTime / 200;
         }
@@ -68,11 +68,11 @@ public class SpawningObstacles : MonoBehaviour
     {
         if(obstacle.GetComponent<Obstacles>().type==Obstacles.Types.Triangle)
         {
-            inactiveTriangles.Add(obstacle);
+                inactiveTriangles.Add(obstacle);
         }
         else
         {
-            inactiveSquares.Add(obstacle);
+                inactiveSquares.Add(obstacle);
         }
     }
 
@@ -86,6 +86,18 @@ public class SpawningObstacles : MonoBehaviour
             inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] - 0.1f, position[1] - 0.1f, 0), transform.rotation);
             inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
             inactiveTriangles.RemoveAt(0);
+        }
+    }
+    
+    public bool ContainsObstacle(GameObject obstacle)
+    {
+        if(inactiveTriangles.Contains(obstacle) || inactiveSquares.Contains(obstacle))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

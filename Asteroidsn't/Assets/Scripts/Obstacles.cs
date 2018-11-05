@@ -65,19 +65,22 @@ public class Obstacles : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag=="Player")
         {
-            Vector2 tmp = Vector2.negativeInfinity;
-            if(type==Types.Square)
+            if (!GameControl.instance.gameObject.GetComponent<SpawningObstacles>().ContainsObstacle(this.gameObject))
             {
-                tmp = transform.position;
+                Vector2 tmp = Vector2.negativeInfinity;
+                if (type == Types.Square)
+                {
+                    tmp = transform.position;
+                }
+                transform.SetPositionAndRotation(new Vector3(inactiveObstaclesXLimit + 5, transform.position.y, 0), transform.rotation);
+                if (tmp[0] != float.NegativeInfinity)
+                {
+                    GameControl.instance.gameObject.GetComponent<SpawningObstacles>().MakeTriangles(tmp);
+                }
+                GameControl.instance.gameObject.GetComponent<SpawningObstacles>().AddToList(this.gameObject);
             }
-            transform.SetPositionAndRotation(new Vector3(inactiveObstaclesXLimit + 5, transform.position.y, 0), transform.rotation);
-            if(tmp[0]!=float.NegativeInfinity)
-            {
-                GameControl.instance.gameObject.GetComponent<SpawningObstacles>().MakeTriangles(tmp);
-            }
-            GameControl.instance.gameObject.GetComponent<SpawningObstacles>().AddToList(this.gameObject);
         }
     }
 }
