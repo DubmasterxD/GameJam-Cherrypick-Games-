@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Student
   - Police
+  - Score
+  - PolicePool
   layers:
   - Default
   - TransparentFX

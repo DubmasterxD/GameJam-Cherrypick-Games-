@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public static Score instance;
     public int score = 0;
     private float timer = 0;
     private float timeSinceLastStudentKill = 0;
@@ -13,24 +12,12 @@ public class Score : MonoBehaviour
     private float multiTextTimer=0;
     public Text multikillText;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void Update()
     {
         timer += Time.deltaTime;
         timeSinceLastStudentKill += Time.deltaTime;
         multiTextTimer += Time.deltaTime;
-        if (multiTextTimer > 3 && multikillText.gameObject.active)
+        if (multiTextTimer > 3 && multikillText.gameObject.active==true)
         {
             multikillText.gameObject.SetActive(false);
         }

@@ -23,12 +23,14 @@ public class Gun : MonoBehaviour
     public Image guiMagazine2;
     public Image guiMagazine3;
     private Animator anim;
+    private Score score;
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponentInParent<Animator>();
         pool = studentPool.GetComponent<StudentPool>();
+        score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
     }
 
     // Update is called once per frame
@@ -71,7 +73,7 @@ public class Gun : MonoBehaviour
             bulletsInMagazines[2] = lastSeenMagazine.GetComponent<DropMagazineScript>().ammoLeft;
             guiMagazine3.gameObject.SetActive(true);
         }
-        Destroy(lastSeenMagazine);
+        lastSeenMagazine.GetComponent<DropMagazineScript>().PickedUp();
     }
 
     bool CanPickMagazine()
@@ -136,13 +138,42 @@ public class Gun : MonoBehaviour
             {
                 pool.studentCount--;
                 pool.SetStudentsLeftText();
-                Score.instance.StudentKill();
+                score.StudentKill();
                 Destroy(hit.collider.gameObject);
+            }
+            else if(hit.collider.gameObject.tag=="Police")
+            {
+                if (hit.collider.isTrigger)
+                {
+                    hit.collider.gameObject.GetComponent<Policeman>().Headshot();
+                }
+                else
+                {
+                    hit.collider.gameObject.GetComponent<Policeman>().TakeDamage(CalculateDmg(hit.distance));
+                }
             }
             if (bulletsInMagazines[0] == 0)
             {
                 guiMagazine1.gameObject.SetActive(false);
             }
         }
+    }
+
+    float CalculateDmg(float distance)
+    {
+        float dmgTaken = 0;
+        if (distance < 50)
+        {
+            dmgTaken = 100 - distance;
+        }
+        else if (distance < 100)
+        {
+            dmgTaken = 90 - 0.8f * distance;
+        }
+        else
+        {
+            dmgTaken = 10;
+        }
+        return dmgTaken;
     }
 }
