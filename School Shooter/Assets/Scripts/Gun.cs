@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Gun : MonoBehaviour {
+public class Gun : MonoBehaviour
+{
 
     public int[] bulletsInMagazines = { 17, 0, 0 };
     public Text bulletfLeftText;
@@ -12,27 +13,30 @@ public class Gun : MonoBehaviour {
     public float reloadDelay = 0.5f;
     private float timeSinceReload = 0;
     public float pickAmmoRange = 10;
+    public float shootRange = 300;
+    public GameObject studentPool;
+    private StudentPool pool;
     public Text pickUpAmmoText;
     private GameObject lastSeenMagazine;
     public Transform shootPoint;
     public Image guiMagazine1;
     public Image guiMagazine2;
     public Image guiMagazine3;
-    public GameObject bulletPrefab;
     private Animator anim;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         anim = GetComponentInParent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        pool = studentPool.GetComponent<StudentPool>();
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (CanShootReload())
         {
-            if(bulletsInMagazines[0]==0)
+            if (bulletsInMagazines[0] == 0)
             {
                 Reload();
             }
@@ -46,9 +50,9 @@ public class Gun : MonoBehaviour {
             }
         }
         bulletfLeftText.text = bulletsInMagazines[0].ToString();
-        if(CanPickMagazine())
+        if (CanPickMagazine())
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 PickUpMagazine();
             }
@@ -57,7 +61,7 @@ public class Gun : MonoBehaviour {
 
     void PickUpMagazine()
     {
-        if(bulletsInMagazines[1]==0)
+        if (bulletsInMagazines[1] == 0)
         {
             bulletsInMagazines[1] = lastSeenMagazine.GetComponent<DropMagazineScript>().ammoLeft;
             guiMagazine2.gameObject.SetActive(true);
@@ -103,7 +107,7 @@ public class Gun : MonoBehaviour {
 
     void Reload()
     {
-        if(bulletsInMagazines[1]!=0)
+        if (bulletsInMagazines[1] != 0)
         {
             anim.SetTrigger("reload");
             timeSinceReload = 0;
@@ -111,7 +115,7 @@ public class Gun : MonoBehaviour {
             bulletsInMagazines[1] = bulletsInMagazines[2];
             bulletsInMagazines[2] = 0;
             guiMagazine3.gameObject.SetActive(false);
-            if(bulletsInMagazines[1]==0)
+            if (bulletsInMagazines[1] == 0)
             {
                 guiMagazine2.gameObject.SetActive(false);
             }
@@ -121,13 +125,21 @@ public class Gun : MonoBehaviour {
 
     void Shoot()
     {
-        if(bulletsInMagazines[0]!=0)
+        if (bulletsInMagazines[0] != 0)
         {
             anim.SetTrigger("shot");
             timeSinceLastShot = 0;
             bulletsInMagazines[0]--;
-            Instantiate(bulletPrefab,shootPoint.position,shootPoint.rotation);
-            if(bulletsInMagazines[0]==0)
+            RaycastHit hit = new RaycastHit();
+            Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, shootRange);
+            if(hit.collider.gameObject.tag=="Student")
+            {
+                pool.studentCount--;
+                pool.SetStudentsLeftText();
+                Score.instance.StudentKill();
+                Destroy(hit.collider.gameObject);
+            }
+            if (bulletsInMagazines[0] == 0)
             {
                 guiMagazine1.gameObject.SetActive(false);
             }

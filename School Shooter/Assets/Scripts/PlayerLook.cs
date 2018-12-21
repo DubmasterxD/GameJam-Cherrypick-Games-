@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLook : MonoBehaviour {
+public class PlayerLook : MonoBehaviour
+{
 
     public float mouseSensitivity;
     private Vector3 eulerRotation;
@@ -10,7 +11,7 @@ public class PlayerLook : MonoBehaviour {
     private Vector3 playerRotation;
 
     // Use this for initialization
-    void Awake ()
+    void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         eulerRotation = new Vector3(0, 0, 0);

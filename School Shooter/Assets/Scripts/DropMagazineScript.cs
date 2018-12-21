@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class DropMagazineScript : MonoBehaviour
 {
-    public int ammoLeft=17;
+    public int ammoLeft = 17;
 }
 	
