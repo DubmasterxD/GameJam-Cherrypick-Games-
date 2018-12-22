@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public int score = 0;
-    private float timer = 0;
+    public float timer = 0;
     private float timeSinceLastStudentKill = 0;
     private int killCombo = 0;
     private float multiTextTimer=0;
@@ -28,23 +27,23 @@ public class Score : MonoBehaviour
         killCombo++;
         if (timeSinceLastStudentKill < 6)
         {
-            score += killCombo * 1000;
+            GameController.instance.score += killCombo * 1000;
         }
         else if (timeSinceLastStudentKill < 12)
         {
-            score += (int)(1000 + 1000*(killCombo - 1) * (10 - timeSinceLastStudentKill));
+            GameController.instance.score += (int)(1000 + 1000*(killCombo - 1) * (10 - timeSinceLastStudentKill));
         }
         else
         {
             killCombo = 1;
-            score += 1000;
+            GameController.instance.score += 1000;
         }
         if (killCombo == 5)
         {
-            score += 10000;
+            GameController.instance.score += 10000;
         }
         MultikillUpdate();
-        gameObject.GetComponent<Text>().text = score.ToString();
+        gameObject.GetComponent<Text>().text = GameController.instance.score.ToString();
         timeSinceLastStudentKill = 0;
     }
 
@@ -78,10 +77,5 @@ public class Score : MonoBehaviour
         }
         multikillText.gameObject.SetActive(true);
         multiTextTimer = 0;
-    }
-
-    public void EndGame()
-    {
-        score += (int)(180 / timer * 1000);
     }
 }

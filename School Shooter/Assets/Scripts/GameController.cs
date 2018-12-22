@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class GameController : MonoBehaviour
 
     public void PlayerDie()
     {
+        score -= 5000;
+        SceneManager.LoadScene("SubmitScore");
+    }
 
+    public void Win(float timer)
+    {
+        score += (int)(60 / timer * 1000);
+        SceneManager.LoadScene("SubmitScore");
     }
 }

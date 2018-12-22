@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81f708f11fc7a14c9902ebe94c8b23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  timer: 0
   multikillText: {fileID: 453576428}
 --- !u!222 &40117619
 CanvasRenderer:
@@ -3057,18 +3057,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &212744587
-SphereCollider:
+--- !u!136 &212744587
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 212744585}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
+  m_Enabled: 0
   m_Radius: 2
-  m_Center: {x: 0, y: 9.5, z: 0}
+  m_Height: 10.453631
+  m_Direction: 1
+  m_Center: {x: 0, y: -2.2731829, z: 0}
 --- !u!136 &212744588
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3079,9 +3080,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 2
-  m_Height: 15
+  m_Height: 19.002932
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2.0014658, z: 0}
 --- !u!4 &212744589
 Transform:
   m_ObjectHideFlags: 0
@@ -3113,6 +3114,9 @@ MonoBehaviour:
   hp: 100
   blood: {fileID: 2038958403}
   blood2: {fileID: 356382025}
+  standCollider: {fileID: 212744588}
+  duckCollider: {fileID: 212744587}
+  gun: {fileID: 534669902}
 --- !u!4 &217404194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4990402702333248, guid: 04be9ae15d1acd046a05e94f190d1429,
@@ -4012,6 +4016,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4417820890183260, guid: caeae89280a02904a8f464421da6179b,
     type: 2}
   m_PrefabInternal: {fileID: 1169035207}
+--- !u!1 &334980926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 334980927}
+  - component: {fileID: 334980928}
+  - component: {fileID: 334980929}
+  m_Layer: 0
+  m_Name: Finish
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &334980927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334980926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.52, y: -9.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 933709799}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &334980928
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334980926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.7424438, y: 1, z: 5.1511393}
+  m_Center: {x: -0.039631084, y: 2.7579423e-14, z: 2.0755699}
+--- !u!114 &334980929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334980926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7d8943113d78b478d30b33d66ecf6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &335282874
 Prefab:
   m_ObjectHideFlags: 0
@@ -6214,7 +6271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff69ba982e85ad6478ff4d1220f38941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 150
+  mouseSensitivity: 40
   playerBody: {fileID: 212744589}
 --- !u!1001 &535451178
 Prefab:
@@ -8046,7 +8103,7 @@ GameObject:
   - component: {fileID: 736765329}
   - component: {fileID: 736765328}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9856,8 +9913,8 @@ MonoBehaviour:
   bulletsInMagazines: 110000000000000000000000
   bulletfLeftText: {fileID: 1376539815}
   shotsDelay: 0.35
-  reloadDelay: 0.5
-  pickAmmoRange: 10
+  reloadDelay: 1
+  pickAmmoRange: 12
   shootRange: 300
   studentPool: {fileID: 995612804}
   pickUpAmmoText: {fileID: 43937345}
@@ -10138,6 +10195,7 @@ Transform:
   - {fileID: 1022543798}
   - {fileID: 1336752366}
   - {fileID: 578677482}
+  - {fileID: 334980927}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11528,6 +11586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120437386}
   - component: {fileID: 1120437385}
+  - component: {fileID: 1120437387}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -11560,6 +11619,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120437387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1120437384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f22b4c7579b274596c43c4c393d4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreboard: []
 --- !u!1001 &1124069379
 Prefab:
   m_ObjectHideFlags: 0
@@ -15806,7 +15877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1551437773
 Transform:
   m_ObjectHideFlags: 0

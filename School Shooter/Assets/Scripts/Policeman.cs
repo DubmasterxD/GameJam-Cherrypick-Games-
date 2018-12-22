@@ -72,7 +72,7 @@ public class Policeman : MonoBehaviour {
 
     private void Shoot()
     {
-        if(PlayerInSight())
+        //if(PlayerInSight())
         {
             RaycastHit hit;
             Vector3 randomDifference = new Vector3();
