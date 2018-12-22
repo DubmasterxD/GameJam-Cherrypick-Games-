@@ -15,11 +15,14 @@ public class PlayerMovement : MonoBehaviour
     public Collider standCollider;
     public Collider duckCollider;
     public GameObject gun;
+    private AudioSource audioSource;
+    public AudioClip hitSound;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -66,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        audioSource.clip = hitSound;
+        audioSource.Play();
         hp -= dmg;
         UpdateScreen();
         if(hp<=0)

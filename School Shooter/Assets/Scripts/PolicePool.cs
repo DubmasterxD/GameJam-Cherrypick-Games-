@@ -56,7 +56,7 @@ public class PolicePool : MonoBehaviour
         for (int i = 0; i < walkingPoliceCount; i++)
         {
             walkingPolice[i] = Instantiate(policePrefab, spawnPoints[0].position, spawnPoints[0].rotation);
-            walkingPolice[i].GetComponent<Policeman>().canMove = true;
+            walkingPolice[i].GetComponent<Policeman>().ActivateMovable();
         }
         for (int i = 0; i < magazinesCount; i++)
         {

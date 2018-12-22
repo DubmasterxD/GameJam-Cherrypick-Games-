@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\DropMagazineScript.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
+    <Compile Include="Assets\Scripts\Headshot.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Pathing.cs" />
     <Compile Include="Assets\Scripts\PlayerLook.cs" />

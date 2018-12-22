@@ -24,6 +24,10 @@ public class Gun : MonoBehaviour
     public Image guiMagazine3;
     private Animator anim;
     private Score score;
+    private AudioSource gunAudioSource;
+    public AudioClip shotSound;
+    public AudioClip reloadSound;
+    public AudioClip pickMagazineSound;
 
     // Use this for initialization
     void Start()
@@ -31,6 +35,7 @@ public class Gun : MonoBehaviour
         anim = GetComponentInParent<Animator>();
         pool = studentPool.GetComponent<StudentPool>();
         score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        gunAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,6 +68,8 @@ public class Gun : MonoBehaviour
 
     void PickUpMagazine()
     {
+        gunAudioSource.clip = pickMagazineSound;
+        gunAudioSource.Play();
         if (bulletsInMagazines[1] == 0)
         {
             bulletsInMagazines[1] = lastSeenMagazine.GetComponent<DropMagazineScript>().ammoLeft;
@@ -111,6 +118,8 @@ public class Gun : MonoBehaviour
     {
         if (bulletsInMagazines[1] != 0)
         {
+            gunAudioSource.clip = reloadSound;
+            gunAudioSource.Play();
             anim.SetTrigger("reload");
             timeSinceReload = 0;
             bulletsInMagazines[0] = bulletsInMagazines[1];
@@ -129,6 +138,8 @@ public class Gun : MonoBehaviour
     {
         if (bulletsInMagazines[0] != 0)
         {
+            gunAudioSource.clip = shotSound;
+            gunAudioSource.Play();
             anim.SetTrigger("shot");
             timeSinceLastShot = 0;
             bulletsInMagazines[0]--;
