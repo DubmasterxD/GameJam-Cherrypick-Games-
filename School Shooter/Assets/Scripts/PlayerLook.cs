@@ -14,6 +14,7 @@ public class PlayerLook : MonoBehaviour
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         eulerRotation = new Vector3(0, 0, 0);
         playerRotation = new Vector3(0, 0, 0);
     }

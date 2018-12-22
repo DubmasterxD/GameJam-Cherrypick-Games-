@@ -39,4 +39,6 @@ public class MainMenu : MonoBehaviour {
                           "\n" + ScoreboardManager.instance.scoreboard[5].score +
                           "\n" + ScoreboardManager.instance.scoreboard[6].score;
     }
+
+
 }

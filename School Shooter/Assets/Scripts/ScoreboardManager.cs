@@ -41,11 +41,7 @@ public class ScoreboardManager : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
-            scoreboard = new List<PlayerScore>();
-            for(int i=0; i<7;i++)
-            {
-                scoreboard.Add(new PlayerScore());
-            }
+            ResetScores();
             DontDestroyOnLoad(gameObject);
             LoadScores();
         }
@@ -98,5 +94,14 @@ public class ScoreboardManager : MonoBehaviour {
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(fs, scoreboard);
         fs.Close();
+    }
+
+    public void ResetScores()
+    {
+        scoreboard = new List<PlayerScore>();
+        for (int i = 0; i < 7; i++)
+        {
+            scoreboard.Add(new PlayerScore());
+        }
     }
 }

@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class ScoreSubmit : MonoBehaviour {
 
     public Text nick;
+    public Text score;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        score.text = GameController.instance.score.ToString();
     }
 
     public void Submit()

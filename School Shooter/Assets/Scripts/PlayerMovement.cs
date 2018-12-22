@@ -32,6 +32,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forwardMovement = transform.forward * Input.GetAxis("Vertical") * movementSpeed;
         Vector3 sideMovement = transform.right * Input.GetAxis("Horizontal") * movementSpeed / 2;
         Duck(forwardMovement, sideMovement);
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            forwardMovement /= 3;
+            sideMovement /= 3;
+        }
         if (Input.GetKey(KeyCode.LeftShift))
         {
             if (!Input.GetKey(KeyCode.LeftControl))
@@ -50,11 +55,6 @@ public class PlayerMovement : MonoBehaviour
             standCollider.enabled = false;
             duckCollider.enabled = true;
             gun.transform.localPosition = new Vector3(0, 2.091837f, 0.9152897f);
-        }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            forwardMovement /= 3;
-            sideMovement /= 3;
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
