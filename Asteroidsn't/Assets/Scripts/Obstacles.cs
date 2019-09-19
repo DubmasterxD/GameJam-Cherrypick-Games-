@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
-
+    [SerializeField] GameObject destroyParticlePrefab = null;
     public float speedMin = 0.5f;
     public float speedMax = 4f;
     private float speed;
@@ -67,6 +67,7 @@ public class Obstacles : MonoBehaviour
     {
         if (collision.gameObject.tag=="Player")
         {
+            Instantiate(destroyParticlePrefab, transform.position, Quaternion.identity);
             if (!GameControl.instance.gameObject.GetComponent<SpawningObstacles>().ContainsObstacle(this.gameObject))
             {
                 Vector2 tmp = Vector2.negativeInfinity;

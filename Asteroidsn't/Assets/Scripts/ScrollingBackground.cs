@@ -9,7 +9,7 @@ public class ScrollingBackground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        uvOffset += GameControl.instance.move * Time.deltaTime;
+        uvOffset -= GameControl.instance.move * Time.deltaTime;
         GetComponent<Renderer>().materials[0].SetTextureOffset("_MainTex", uvOffset);
     }
 }

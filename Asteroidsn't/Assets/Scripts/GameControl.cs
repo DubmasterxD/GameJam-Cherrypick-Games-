@@ -25,22 +25,20 @@ public class GameControl : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            Screen.SetResolution(1280, 720, false);
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
     }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         move[0] -= Mathf.Cos(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity * Time.deltaTime;
         move[1] -= Mathf.Sin(Mathf.Deg2Rad * GameObject.FindGameObjectWithTag("Player").gameObject.transform.localEulerAngles.z) * currVelocity * Time.deltaTime;
         if (Mathf.Pow(move[0], 2) + Mathf.Pow(move[1], 2) > maxVelocity)
