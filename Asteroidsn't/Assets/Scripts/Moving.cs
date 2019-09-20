@@ -1,13 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Moving : MonoBehaviour
+namespace Asteroids
 {
-
-    // Update is called once per frame
-    void Update()
+    public class Moving : MonoBehaviour
     {
-        transform.SetPositionAndRotation(new Vector3(transform.position[0] + GameControl.instance.move[0] * 10 * Time.deltaTime, transform.position[1] + GameControl.instance.move[1] * 10 * Time.deltaTime, transform.position[2]), transform.rotation);
+        PlayerController player;
+
+        private void Awake()
+        {
+            player = FindObjectOfType<PlayerController>();
+        }
+
+        void Update()
+        {
+            Move();
+        }
+
+        private void Move()
+        {
+            float deltaX = player.Velocity.x * 10 * Time.deltaTime;
+            float deltaY = player.Velocity.y * 10 * Time.deltaTime;
+            Vector3 newPosition = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
+            transform.SetPositionAndRotation(newPosition, transform.rotation);
+        }
     }
 }

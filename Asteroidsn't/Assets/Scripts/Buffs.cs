@@ -1,60 +1,82 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Buffs : MonoBehaviour {
-
-    public enum Bonuses { Plus, x2, Destroy}; //x2 tak na prawdę nie przyspiesza podwójnie
-    public Bonuses bonus;
-    public float edge = 5.07f;
-
-    private void Update()
+namespace Asteroids
+{
+    public class Buffs : MonoBehaviour
     {
-        if (transform.position.x > edge)
-        {
-            transform.SetPositionAndRotation(new Vector3(-edge, transform.position.y, 0), transform.rotation);
-        }
-        if (transform.position.x < -edge)
-        {
-            transform.SetPositionAndRotation(new Vector3(edge, transform.position.y, 0), transform.rotation);
-        }
-        if (transform.position.y > edge && transform.position.y<GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y-1)
-        {
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, -edge, 0), transform.rotation);
-        }
-        if(transform.position.y > GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y - 1 && transform.position.y < GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y)
-        {
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y + 5, 0), Quaternion.identity);
-        }
-        if (transform.position.y < -edge)
-        {
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, edge, 0), transform.rotation);
-        }
-    }
+        enum Bonuses { Plus, ASBoost, Destroy };
+        [SerializeField] Bonuses bonus;
+        [SerializeField] float playSpaceEdge = 5.07f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag=="Player")
+        Stats stats;
+
+        private void Awake()
         {
-            transform.SetPositionAndRotation(GameControl.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace, transform.rotation);
+            stats = FindObjectOfType<Stats>();
+        }
+
+        private void Update()
+        {
+            StayInsidePlaySpace();
+        }
+
+        private void StayInsidePlaySpace()
+        {
+            if (transform.position.x > playSpaceEdge)
+            {
+                transform.SetPositionAndRotation(new Vector3(-playSpaceEdge, transform.position.y, 0), transform.rotation);
+            }
+            if (transform.position.x < -playSpaceEdge)
+            {
+                transform.SetPositionAndRotation(new Vector3(playSpaceEdge, transform.position.y, 0), transform.rotation);
+            }
+            if (transform.position.y > playSpaceEdge && transform.position.y < Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y - 1)
+            {
+                transform.SetPositionAndRotation(new Vector3(transform.position.x, -playSpaceEdge, 0), transform.rotation);
+            }
+            if (transform.position.y > Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y - 1 && transform.position.y < Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y)
+            {
+                transform.SetPositionAndRotation(new Vector3(transform.position.x, Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y + 5, 0), Quaternion.identity);
+            }
+            if (transform.position.y < -playSpaceEdge)
+            {
+                transform.SetPositionAndRotation(new Vector3(transform.position.x, playSpaceEdge, 0), transform.rotation);
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                GiveBonus();
+            }
+        }
+
+        private void GiveBonus()
+        {
+            ReturnToPool();
             switch (bonus)
             {
                 case Bonuses.Plus:
-                    GameControl.instance.LifesLeft = GameControl.instance.LifesLeft + 1;
-                    GameControl.instance.lifesLeftText.text = "Lifes : " + GameControl.instance.LifesLeft;
+                    stats.AddLife();
                     break;
-                case Bonuses.x2:
-                    GameControl.instance.player.GetComponent<Arrow>().shotsDelay /= 8 / 7f;
+                case Bonuses.ASBoost:
+                    stats.IncreaseAttackSpeed(7 / 8f);
                     break;
                 case Bonuses.Destroy:
-                    for (int i = 0; i < 100/GameControl.instance.GetComponent<SpawningObstacles>().activeRate; i++)
+                    for (int i = 0; i < 100 / Game.instance.GetComponent<SpawningObstacles>().activeRate; i++)
                     {
-                        GameControl.instance.AddPoint();
+                        stats.AddPoint();
                     }
                     break;
                 default:
                     break;
             }
+        }
+
+        private void ReturnToPool()
+        {
+            transform.SetPositionAndRotation(Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace, transform.rotation);
         }
     }
 }

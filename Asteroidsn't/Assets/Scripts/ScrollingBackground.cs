@@ -1,15 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ScrollingBackground : MonoBehaviour
+namespace Asteroids
 {
-    private Vector2 uvOffset = Vector2.zero;
-
-    // Update is called once per frame
-    void Update()
+    public class ScrollingBackground : MonoBehaviour
     {
-        uvOffset -= GameControl.instance.move * Time.deltaTime;
-        GetComponent<Renderer>().materials[0].SetTextureOffset("_MainTex", uvOffset);
+        Vector2 uvOffset = Vector2.zero;
+
+        PlayerController player;
+
+        private void Awake()
+        {
+            player = FindObjectOfType<PlayerController>();   
+        }
+
+        void Update()
+        {
+            MoveBackgroundTexture();
+        }
+
+        private void MoveBackgroundTexture()
+        {
+            uvOffset -= player.Velocity * Time.deltaTime;
+            GetComponent<Renderer>().materials[0].SetTextureOffset("_MainTex", uvOffset);
+        }
     }
 }

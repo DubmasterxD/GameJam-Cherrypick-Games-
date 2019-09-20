@@ -1,35 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Shots : MonoBehaviour
+namespace Asteroids
 {
-
-    public float lifetime = 3;
-    private float timeAlive = 0;
-    public float speed = 2;
-    private Rigidbody2D rb;
-
-    // Use this for initialization
-    void Start()
+    public class Shots : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(Mathf.Cos(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed, Mathf.Sin(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed);
-    }
+        [SerializeField] float speed = 2;
+        [SerializeField] float lifetime = 3;
 
-    // Update is called once per frame
-    void Update()
-    {
-        timeAlive += Time.deltaTime;
-        if (timeAlive >= lifetime)
+        Rigidbody2D rb;
+
+        private void Awake()
         {
-            Destroy(this.gameObject);
+            rb = GetComponent<Rigidbody2D>();
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        GameControl.instance.AddPoint();
-        Destroy(this.gameObject);
+        void Start()
+        {
+            rb.velocity = new Vector2(Mathf.Cos(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed, Mathf.Sin(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed); //TODO simplify
+            Destroy(gameObject, lifetime);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            FindObjectOfType<Stats>().AddPoint();
+            Destroy(gameObject);
+        }
     }
 }

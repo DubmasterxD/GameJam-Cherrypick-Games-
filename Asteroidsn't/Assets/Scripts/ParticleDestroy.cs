@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 
-public class ParticleDestroy : MonoBehaviour
+namespace Asteroids
 {
-    [SerializeField] float delayBeforeDestroy = .3f;
-
-    void Start()
+    public class ParticleDestroy : MonoBehaviour
     {
-        Destroy(gameObject, delayBeforeDestroy);
+        [SerializeField] float delayBeforeDestroy = .3f;
+
+        void Start()
+        {
+            Destroy(gameObject, delayBeforeDestroy);
+        }
     }
 }
