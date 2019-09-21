@@ -44,7 +44,7 @@ namespace Asteroids
                     if (inactiveSquares.Count > 0)
                     {
                         inactiveSquares[0].transform.SetPositionAndRotation(new Vector3(Random.Range(activeMin[0], activeMax[0]), Random.Range(activeMin[1], activeMax[1]), 0), transform.rotation);
-                        inactiveSquares[0].GetComponent<Obstacles>().Randomize();
+                        inactiveSquares[0].GetComponent<Obstacles>().RandomizeMovement();
                         inactiveSquares.RemoveAt(0);
                     }
                 }
@@ -53,7 +53,7 @@ namespace Asteroids
                     if (inactiveTriangles.Count > 0)
                     {
                         inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(Random.Range(activeMin[0], activeMax[0]), Random.Range(activeMin[1], activeMax[1]), 0), transform.rotation);
-                        inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
+                        inactiveTriangles[0].GetComponent<Obstacles>().RandomizeMovement();
                         inactiveTriangles.RemoveAt(0);
                     }
                 }
@@ -81,10 +81,10 @@ namespace Asteroids
             if (!Game.instance.gameOver && inactiveTriangles.Count > 1)
             {
                 inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] + 0.1f, position[1] + 0.1f, 0), transform.rotation);
-                inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
+                inactiveTriangles[0].GetComponent<Obstacles>().RandomizeMovement();
                 inactiveTriangles.RemoveAt(0);
                 inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] - 0.1f, position[1] - 0.1f, 0), transform.rotation);
-                inactiveTriangles[0].GetComponent<Obstacles>().Randomize();
+                inactiveTriangles[0].GetComponent<Obstacles>().RandomizeMovement();
                 inactiveTriangles.RemoveAt(0);
             }
         }

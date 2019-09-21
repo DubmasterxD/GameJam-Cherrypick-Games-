@@ -15,15 +15,22 @@ namespace Asteroids
         public enum Types { Triangle, Square };
         public Types type;
 
-        // Use this for initialization
-        void Start()
+        private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            Randomize();
         }
 
-        // Update is called once per frame
+        void Start()
+        {
+            RandomizeMovement();
+        }
+        
         void Update()
+        {
+            StayInsidePlaySpace();
+        }
+
+        private void StayInsidePlaySpace()
         {
             if (transform.position.x > edge && transform.position.x < inactiveObstaclesXLimit)
             {
@@ -51,11 +58,11 @@ namespace Asteroids
             }
         }
 
-        public void Randomize()
+        public void RandomizeMovement()
         {
             speed = Random.Range(speedMin, speedMax);
-            direction[0] = Random.Range(-1f, 1f);
-            direction[1] = Mathf.Sqrt(1 - Mathf.Pow(direction[0], 2));
+            direction.x = Random.Range(-1f, 1f);
+            direction.y = Mathf.Sqrt(1 - Mathf.Pow(direction.x, 2));
             if (Random.Range(0, 2) == 0)
             {
                 direction[1] *= -1;
@@ -68,7 +75,7 @@ namespace Asteroids
             if (collision.gameObject.tag == "Player")
             {
                 Instantiate(destroyParticlePrefab, transform.position, Quaternion.identity);
-                if (!Game.instance.gameObject.GetComponent<SpawningObstacles>().ContainsObstacle(this.gameObject))
+                if (!FindObjectOfType<SpawningObstacles>().ContainsObstacle(gameObject))
                 {
                     Vector2 tmp = Vector2.negativeInfinity;
                     if (type == Types.Square)
@@ -78,9 +85,9 @@ namespace Asteroids
                     transform.SetPositionAndRotation(new Vector3(inactiveObstaclesXLimit + 5, transform.position.y, 0), transform.rotation);
                     if (tmp[0] != float.NegativeInfinity)
                     {
-                        Game.instance.gameObject.GetComponent<SpawningObstacles>().MakeTriangles(tmp);
+                        FindObjectOfType<SpawningObstacles>().MakeTriangles(tmp);
                     }
-                    Game.instance.gameObject.GetComponent<SpawningObstacles>().AddToList(this.gameObject);
+                    FindObjectOfType<SpawningObstacles>().AddToList(gameObject);
                 }
             }
         }

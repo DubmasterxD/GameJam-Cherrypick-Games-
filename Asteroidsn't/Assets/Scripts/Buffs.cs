@@ -20,7 +20,7 @@ namespace Asteroids
             StayInsidePlaySpace();
         }
 
-        private void StayInsidePlaySpace()
+        private void StayInsidePlaySpace() //TODO cleanup
         {
             if (transform.position.x > playSpaceEdge)
             {
@@ -30,13 +30,13 @@ namespace Asteroids
             {
                 transform.SetPositionAndRotation(new Vector3(playSpaceEdge, transform.position.y, 0), transform.rotation);
             }
-            if (transform.position.y > playSpaceEdge && transform.position.y < Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y - 1)
+            if (transform.position.y > playSpaceEdge && transform.position.y < FindObjectOfType<SpawningBuffs>().waitPlace.y - 1)
             {
                 transform.SetPositionAndRotation(new Vector3(transform.position.x, -playSpaceEdge, 0), transform.rotation);
             }
-            if (transform.position.y > Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y - 1 && transform.position.y < Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y)
+            if (transform.position.y > FindObjectOfType<SpawningBuffs>().waitPlace.y - 1 && transform.position.y < FindObjectOfType<SpawningBuffs>().waitPlace.y)
             {
-                transform.SetPositionAndRotation(new Vector3(transform.position.x, Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace.y + 5, 0), Quaternion.identity);
+                transform.SetPositionAndRotation(new Vector3(transform.position.x, FindObjectOfType<SpawningBuffs>().waitPlace.y + 5, 0), Quaternion.identity);
             }
             if (transform.position.y < -playSpaceEdge)
             {
@@ -64,19 +64,24 @@ namespace Asteroids
                     stats.IncreaseAttackSpeed(7 / 8f);
                     break;
                 case Bonuses.Destroy:
-                    for (int i = 0; i < 100 / Game.instance.GetComponent<SpawningObstacles>().activeRate; i++)
-                    {
-                        stats.AddPoint();
-                    }
+                    Bonus3Action();
                     break;
                 default:
                     break;
             }
         }
 
+        private void Bonus3Action() //TODO
+        {
+            for (int i = 0; i < 100 / FindObjectOfType<SpawningObstacles>().activeRate; i++)
+            {
+                stats.AddPoint();
+            }
+        }
+
         private void ReturnToPool()
         {
-            transform.SetPositionAndRotation(Game.instance.gameObject.GetComponent<SpawningBuffs>().waitPlace, transform.rotation);
+            transform.SetPositionAndRotation(FindObjectOfType<SpawningBuffs>().waitPlace, transform.rotation); //TODO
         }
     }
 }
