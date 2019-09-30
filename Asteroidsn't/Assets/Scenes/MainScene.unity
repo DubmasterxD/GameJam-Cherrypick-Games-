@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 583255093}
   - component: {fileID: 583255097}
   - component: {fileID: 583255096}
+  - component: {fileID: 583255098}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -613,9 +614,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02939a54e7435f747b638792933d848a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnVelocity: 4
-  shotsDelay: 0.2
-  shot: {fileID: 1400522864766102, guid: c83564069b2657d41ac89542760c5b6b, type: 3}
+  gun: {fileID: 1737879606}
+  shotPrefab: {fileID: 1400522864766102, guid: c83564069b2657d41ac89542760c5b6b, type: 3}
+  turnSpeed: 4
+  maxSpeed: 0.3
+  gainSpeed: 0.02
 --- !u!95 &583255097
 Animator:
   serializedVersion: 3
@@ -635,6 +638,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &583255098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583255092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e710754b9022ed48b0dc711bfc60fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 2002649732}
+  livesLeftText: {fileID: 1308328602}
+  shotsDelay: 0.2
 --- !u!1 &759126747
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,15 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca73547c493d734bac565befbf714bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 1
-  currVelocity: 0
-  gainVelocity: 0.03
-  move: {x: 0, y: 0}
-  pointsText: {fileID: 2002649732}
-  lifesLeftText: {fileID: 1308328602}
-  gameOver: 0
   gameOverUI: {fileID: 202962893}
-  player: {fileID: 583255092}
 --- !u!4 &1316354212
 Transform:
   m_ObjectHideFlags: 0

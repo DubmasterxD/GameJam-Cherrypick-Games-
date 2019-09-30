@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 50705377198638458}
   - component: {fileID: 114529316016539714}
   - component: {fileID: 114358494792951366}
+  - component: {fileID: 69189237241556905}
   m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
@@ -146,7 +147,6 @@ MonoBehaviour:
     type: 3}
   speedMin: 0.5
   speedMax: 4
-  edge: 5.07
   type: 1
 --- !u!114 &114358494792951366
 MonoBehaviour:
@@ -160,3 +160,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718ece4c3e5b70249a8bd997f8463c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &69189237241556905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779071251359184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c2793bd0c5fa54e8b60c9e1286d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playSpaceEdge: 5.07

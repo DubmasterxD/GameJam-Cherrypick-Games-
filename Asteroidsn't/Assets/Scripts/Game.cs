@@ -5,7 +5,7 @@ namespace Asteroids
 {
     public class Game : MonoBehaviour
     {
-        [SerializeField] GameObject gameOverUI;
+        [SerializeField] GameObject gameOverUI = null;
 
         public bool isGameOver { get; private set; } = false;
 

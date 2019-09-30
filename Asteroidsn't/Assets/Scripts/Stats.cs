@@ -5,8 +5,8 @@ namespace Asteroids
 {
     public class Stats : MonoBehaviour
     {
-        [SerializeField] Text pointsText;
-        [SerializeField] Text livesLeftText;
+        [SerializeField] Text pointsText = null;
+        [SerializeField] Text livesLeftText = null;
         [SerializeField] float shotsDelay = 0.2f;
 
         int points = 0;

@@ -16,27 +16,29 @@ namespace Asteroids
         private List<GameObject> inactiveTriangles;
         private Vector2 inactiveObstaclesSpawnLocation = new Vector2(40, 0);
         private float timeSinceLastActivated;
-
-        // Use this for initialization
+        
         void Start()
         {
             inactiveSquares = new List<GameObject>();
             inactiveTriangles = new List<GameObject>();
             for (int i = 0; i < squaresAmount; i++)
             {
-                inactiveSquares.Add(Instantiate(squaresPrefab, inactiveObstaclesSpawnLocation, Quaternion.identity));
+                GameObject obstacle = Instantiate(squaresPrefab, inactiveObstaclesSpawnLocation, Quaternion.identity);
+                obstacle.SetActive(false);
+                inactiveSquares.Add(obstacle);
             }
             for (int i = 0; i < trianglesAmount; i++)
             {
-                inactiveTriangles.Add(Instantiate(trianglesPrefab, inactiveObstaclesSpawnLocation, Quaternion.identity));
+                GameObject obstacle = Instantiate(squaresPrefab, inactiveObstaclesSpawnLocation, Quaternion.identity);
+                obstacle.SetActive(false);
+                inactiveTriangles.Add(obstacle);
             }
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
             timeSinceLastActivated += Time.deltaTime;
-            if (!Game.instance.gameOver && timeSinceLastActivated >= activeRate)
+            if (!FindObjectOfType<Game>().isGameOver && timeSinceLastActivated >= activeRate)
             {
                 timeSinceLastActivated = 0;
                 if (Random.Range(0, 2) == 1)
@@ -44,7 +46,8 @@ namespace Asteroids
                     if (inactiveSquares.Count > 0)
                     {
                         inactiveSquares[0].transform.SetPositionAndRotation(new Vector3(Random.Range(activeMin[0], activeMax[0]), Random.Range(activeMin[1], activeMax[1]), 0), transform.rotation);
-                        inactiveSquares[0].GetComponent<Obstacles>().RandomizeMovement();
+                        inactiveSquares[0].GetComponent<Obstacle>().RandomizeMovement();
+                        inactiveSquares[0].SetActive(true);
                         inactiveSquares.RemoveAt(0);
                     }
                 }
@@ -53,7 +56,8 @@ namespace Asteroids
                     if (inactiveTriangles.Count > 0)
                     {
                         inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(Random.Range(activeMin[0], activeMax[0]), Random.Range(activeMin[1], activeMax[1]), 0), transform.rotation);
-                        inactiveTriangles[0].GetComponent<Obstacles>().RandomizeMovement();
+                        inactiveTriangles[0].GetComponent<Obstacle>().RandomizeMovement();
+                        inactiveTriangles[0].SetActive(true);
                         inactiveTriangles.RemoveAt(0);
                     }
                 }
@@ -66,7 +70,7 @@ namespace Asteroids
 
         public void AddToList(GameObject obstacle)
         {
-            if (obstacle.GetComponent<Obstacles>().type == Obstacles.Types.Triangle)
+            if (obstacle.GetComponent<Obstacle>().type == Obstacle.Types.Triangle)
             {
                 inactiveTriangles.Add(obstacle);
             }
@@ -78,13 +82,13 @@ namespace Asteroids
 
         public void MakeTriangles(Vector2 position)
         {
-            if (!Game.instance.gameOver && inactiveTriangles.Count > 1)
+            if (!FindObjectOfType<Game>().isGameOver && inactiveTriangles.Count > 1)
             {
                 inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] + 0.1f, position[1] + 0.1f, 0), transform.rotation);
-                inactiveTriangles[0].GetComponent<Obstacles>().RandomizeMovement();
+                inactiveTriangles[0].GetComponent<Obstacle>().RandomizeMovement();
                 inactiveTriangles.RemoveAt(0);
                 inactiveTriangles[0].transform.SetPositionAndRotation(new Vector3(position[0] - 0.1f, position[1] - 0.1f, 0), transform.rotation);
-                inactiveTriangles[0].GetComponent<Obstacles>().RandomizeMovement();
+                inactiveTriangles[0].GetComponent<Obstacle>().RandomizeMovement();
                 inactiveTriangles.RemoveAt(0);
             }
         }

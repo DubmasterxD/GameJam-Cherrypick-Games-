@@ -26,7 +26,7 @@ namespace Asteroids
             stats = GetComponent<Stats>();
             game = FindObjectOfType<Game>();
         }
-        
+
         void Update()
         {
             if (!game.isGameOver)
