@@ -1035,9 +1035,15 @@ MonoBehaviour:
   waitPlace: {x: 0, y: 30, z: 0}
   spawnTime: 20
   maxStayTime: 4
-  plusPrefab: {fileID: 1207203581654932, guid: 4c5bd51790243ce45b28131afa023c3a, type: 3}
-  x2Prefab: {fileID: 1503281862235568, guid: fe86eda807bd24941bc65ed46b302965, type: 3}
-  destroyPrefab: {fileID: 1946445754219556, guid: c548c16181d1f5647b7b7efd9495f992,
+  buffsPrefabs:
+  - {fileID: 9222530962915810441, guid: 03aff27a50dd15d449a62e11408c9a41, type: 3}
+  - {fileID: 5741225056058718693, guid: 88648599fb0a23c488ca666831b884b4, type: 3}
+  - {fileID: 7158932273795436638, guid: 5721793dbb0327240a69524f8b41b250, type: 3}
+  plusPrefab: {fileID: 9110549726186415317, guid: 03aff27a50dd15d449a62e11408c9a41,
+    type: 3}
+  x2Prefab: {fileID: 5638157629240852921, guid: 88648599fb0a23c488ca666831b884b4,
+    type: 3}
+  destroyPrefab: {fileID: 7118938949821982722, guid: 5721793dbb0327240a69524f8b41b250,
     type: 3}
 --- !u!1 &1417770685
 GameObject:

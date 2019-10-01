@@ -16,7 +16,7 @@ namespace Asteroids
 
         void Start()
         {
-            rb.velocity = new Vector2(Mathf.Cos(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed, Mathf.Sin(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed); //TODO simplify
+            rb.velocity = new Vector2(Mathf.Cos(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed, Mathf.Sin(Mathf.Deg2Rad * transform.localEulerAngles.z) * speed);
             Destroy(gameObject, lifetime);
         }
 
